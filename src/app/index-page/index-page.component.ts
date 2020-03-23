@@ -15,13 +15,9 @@ export class IndexPageComponent implements OnInit {
 
   ngOnInit() {
     this._studentService.getStudents().subscribe(response => {
-      console.log(response.split("\n").length);
       var result = response.split("\n");
-      console.log(result);
       for (let index = 0; index < result.length; index++) {
-        
-        console.log(this.parseStudents(result[index].split(',')));
-
+        this.students.push(this.parseStudents(result[index].split(',')));
       }
     }, error => {
       console.log("Error", error);
@@ -30,11 +26,9 @@ export class IndexPageComponent implements OnInit {
 
   parseStudents(info: string[]) {
     let student: Student = new Student();
-    console.log(info);
-    console.log(info[0],info[1],info[2],info[3]);
     student.type = info[0];
     student.name = info[1];
-    student.gender = info[2];
+    student.gender = this.parseGender(info[2]);
     student.timeStamp = this.parseDate(info[3]);
     return student;
   }
@@ -48,6 +42,14 @@ export class IndexPageComponent implements OnInit {
     var second = parseInt(date.substring(12,14));
     var rdate = new Date(year,month,day,hour,minute,second);
     return rdate;
+  }
+
+  parseGender(gender:string){
+    var completegender="Male";
+    if(gender==="F"){
+      completegender = "Female";
+    }
+    return completegender;
   }
 
 }
