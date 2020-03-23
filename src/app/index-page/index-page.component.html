@@ -1,0 +1,13 @@
+<H1>List of students</H1>
+<mat-grid-list cols="5" rowHeight="1:1">
+    <mat-grid-tile *ngFor="let student of this.students">
+        <mat-card class="example-card">
+            <mat-card-content>
+                <p>Student: {{student.name}}</p>
+                <p>Type: {{student.type}}</p>
+                <p>Gender: {{student.gender}}</p>
+                <p>{{student.timeStamp.toUTCString()}}</p>
+            </mat-card-content>
+        </mat-card>
+    </mat-grid-tile>
+</mat-grid-list>
